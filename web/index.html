@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--
+      If you are serving your web app in a path other than the root, change the
+      href value below to reflect the base path you are serving from.
+
+      The path provided below has to start and end with a slash "/" in order for
+      it to work correctly.
+
+      For more details:
+      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+      This is a placeholder for base href that will be replaced by the value of
+      the `--base-href` argument provided to `flutter build`.
+    -->
+    <base href="$FLUTTER_BASE_HREF">
+
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="A new Flutter project.">
+
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="sweat">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <title>OWPSweat</title>
+    <link rel="manifest" href="manifest.json">
+
+    <script>
+    // The value below is injected by flutter build, do not touch.
+    var serviceWorkerVersion = null;
+  </script>
+    <!-- This script adds the flutter initialization JS code -->
+    <script src="flutter.js" defer></script>
+    <!-- Styling for loading indicator -->
+    <style>
+    .grecaptcha-badge { visibility: hidden;}
+    .vertical-centered-box {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      background: #f7f7f7;
+      z-index: 99999999;
+    }
+
+    .vertical-centered-box:after {
+      content: "";
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+      margin-right: -0.25em;
+    }
+
+    .vertical-centered-box .content {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: left;
+      font-size: 0;
+    }
+
+    .loader-circle {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      margin-left: -60px;
+      margin-top: -60px;
+      /* background: #1cc9e4; */
+    }
+
+    .loader-line-mask {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 60px;
+      height: 120px;
+      margin-left: -60px;
+      margin-top: -60px;
+      overflow: hidden;
+      -webkit-transform-origin: 60px 60px;
+      -moz-transform-origin: 60px 60px;
+      -ms-transform-origin: 60px 60px;
+      -o-transform-origin: 60px 60px;
+      transform-origin: 60px 60px;
+      -webkit-mask-image: -webkit-linear-gradient(top, #000000, rgba(0, 0, 0, 0));
+      -webkit-animation: spin 1.2s linear infinite;
+      -moz-animation: spin 1.2s linear infinite;
+      animation: spin 1.2s linear infinite;
+    }
+
+    .loader-line-mask .loader-line {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1px #1cc9e4;
+    }
+
+    @-moz-keyframes spin {
+      100% {
+        -moz-transform: rotate(360deg);
+      }
+    }
+
+    @-webkit-keyframes spin {
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.min.js"></script>
+<script type="text/javascript">
+     pdfjsLib.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.worker.min.js";
+</script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyB6JF0ezHd7amn_v-gNvqO9Y6RS87Wb7zY",
+    authDomain: "sweat-9eb7b.firebaseapp.com",
+    projectId: "sweat-9eb7b",
+    storageBucket: "sweat-9eb7b.appspot.com",
+    messagingSenderId: "239498440527",
+    appId: "1:239498440527:web:4e803c94c08c1841d0df3a"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
+<!-- Loading Indicator -->
+<div id="loading_container" class="vertical-centered-box">
+    <div class="content">
+        <div class="loader-circle"></div>
+        <div class="loader-line-mask">
+            <div class="loader-line"></div>
+        </div>
+        <img style="max-height: 50px; position: relative; z-index: 9;" src="assets/logo.png">
+    </div>
+</div>
+
+<script>
+    <!-- Removes the loading indicator after 10 seconds -->
+    window.onload = function () {
+      setTimeout(function () {
+        var loadingIndicator = document.getElementById("loading_container");
+        if (loadingIndicator) {
+          loadingIndicator.remove();
+        }
+      }, 6000)
+    }
+
+    window.addEventListener('load', function (ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function (engineInitializer) {
+          engineInitializer.initializeEngine().then(function (appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+  </script>
+
+
+</body>
+
+</html>
+
+
